@@ -41,6 +41,11 @@ $PostController = new PostController();
 
 
     <div class="col-12">
+
+        <?php if(count($posts) < 1) : ?>
+            <a href="/post/create" class="btn btn-primary btn-lg btn-block">New item</a>
+        <?php endif; ?>
+
         <?php foreach ($posts as $post) : ?>
 
             <div class="card mb-4">
