@@ -11,6 +11,7 @@ class PostController{
     public function index(){
 
         $postModel = new Post();
+        $posts = [];
 
         if (
             isset($_GET['page']) and
@@ -34,6 +35,12 @@ class PostController{
         $order = (isset($_GET['order']) and trim(strval($_GET['order'])) === 'ASC' ) ? 'ASC' : 'DESC';
 
         $count = $postModel->getTotalPosts();
+
+        if($count == 0){
+            require_once ROOT."/views/posts/index.php";
+            die;
+        }
+
         $total_pages = ceil($count / self::$items_per_page);
 
         if($page > $total_pages){
