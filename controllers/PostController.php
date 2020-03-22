@@ -104,7 +104,7 @@ class PostController{
 
         if( !UserController::loggedIn() ){
             $_SESSION['messages'][] = $this->newError('You must logged in');
-            header("Location: /");
+            header("Location: /login");
             die();
         }
 

@@ -10,22 +10,34 @@ class UserController{
         $login = $this->sanitizer($_POST['user_name']) ? $this->sanitizer($_POST['user_name']) : false;
         $pass  = $this->sanitizer($_POST['password'])  ? $this->sanitizer($_POST['password'])  : false;
 
-        if($login !== $this->login){
-            $_SESSION['messages'][] = $this->newError('Login failed!');
+        unset($_SESSION['messages']);
+
+        if(empty($login)){
+            $_SESSION['messages'][] = $this->newError('Login cannot be blank');
             header("Location: /login");
             die();
         }
 
-        if($pass !== $this->pass){
-            $_SESSION['messages'][] = $this->newError('Login failed!');
+        if(empty($pass)){
+            $_SESSION['messages'][] = $this->newError('Password cannot be blank');
             header("Location: /login");
             die();
         }
 
-        $_SESSION['ifLogedIn'] = true;
-        header("Location: /");
-        die();
-
+        if(
+            empty($_SESSION['messages']) and
+            $login === $this->login and
+            $pass === $this->pass
+        ){
+            $_SESSION['ifLogedIn'] = true;
+            $_SESSION['messages'][] = $this->newError('You are logged in', false);
+            header("Location: /");
+            die();
+        } else {
+            $_SESSION['messages'][] = $this->newError('Login failed!');
+            header("Location: /login");
+            die();
+        }
     }
 
     public static function loggedIn(){
@@ -38,7 +50,7 @@ class UserController{
 
     public function logout(){
         unset($_SESSION['ifLogedIn']);
-        session_destroy();
+        $_SESSION['messages'][] = $this->newError('You are logged out');
         header("Location: /");
         die();
     }
