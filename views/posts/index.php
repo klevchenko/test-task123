@@ -50,6 +50,8 @@ $PostController = new PostController();
 
                     <?php if($post['status']) : ?>
                         <span class="badge badge-success">Task completed</span>
+                    <?php else: ?>
+                        <span class="badge badge-danger">The task is unfinished</span>
                     <?php endif; ?>
 
                     <?php if($post['admin_edit']) : ?>
