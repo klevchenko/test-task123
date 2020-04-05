@@ -2,5 +2,10 @@
     "name": "master/test-task.cc",
     "require": {
         "klein/klein": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "TodoList\\": "app/"
+        }
     }
 }

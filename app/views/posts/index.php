@@ -1,8 +1,8 @@
 <?php
 
-require_once ROOT."/views/header.php";
+require_once APP_ROOT."/views/header.php";
 
-$PostController = new PostController();
+$PostController = new \TodoList\Controllers\Post();
 
 ?>
 
@@ -97,4 +97,4 @@ $PostController = new PostController();
 
 <?php
 
-require_once ROOT."/views/footer.php";
+require_once APP_ROOT."/views/footer.php";

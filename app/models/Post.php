@@ -1,11 +1,13 @@
 <?php
 
-require_once ROOT."/DB.php";
+namespace TodoList\Models;
+
+use TodoList\DB;
 
 class Post{
 
     public function getAll($sort_by, $order, $offset, $items_per_page){
-        $db = BD::connect();
+        $db = DB::connect();
         $posts = [];
 
         $stmt = $db->query("SELECT * FROM posts ORDER BY $sort_by $order LIMIT $offset , $items_per_page");
@@ -25,7 +27,7 @@ class Post{
     }
 
     public function getOne($id){
-        $db = BD::connect();
+        $db = DB::connect();
         $post = [];
 
         $stmt = $db->prepare("SELECT * FROM posts WHERE id = :id");
@@ -48,7 +50,7 @@ class Post{
     }
 
     public function getTotalPosts(){
-        $db = BD::connect();
+        $db = DB::connect();
 
         $count = $db->query('SELECT COUNT(*) FROM posts')->fetchColumn();
 
@@ -56,7 +58,7 @@ class Post{
     }
 
     public function store($user_name, $user_email, $text){
-        $db = BD::connect();
+        $db = DB::connect();
 
         $stmt = $db->prepare("INSERT INTO posts (user_name, user_email, text) VALUES (:user_name, :user_email, :text)");
         $stmt->bindParam(':user_name', $user_name);
@@ -67,7 +69,7 @@ class Post{
     }
 
     public function update($text, $post_id, $task_completed, $admin_edit){
-        $db = BD::connect();
+        $db = DB::connect();
 
         $data = [
             'text' => $text,

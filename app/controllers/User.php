@@ -1,6 +1,8 @@
 <?php
 
-class UserController{
+namespace TodoList\Controllers;
+
+class User{
 
     private $login = 'admin';
     private $pass  = '123';

@@ -1,16 +1,15 @@
 <?php
 
-require_once ROOT."/controllers/UserController.php";
-require_once ROOT."/models/Post.php";
+namespace TodoList\Controllers;
 
-class PostController{
+class Post{
 
     public static $allowed_sort_fields = ['user_name', 'user_email', 'created_at', 'status'];
     public static $items_per_page = 3;
 
     public function index(){
 
-        $postModel = new Post();
+        $postModel = new \TodoList\Models\Post();
         $posts = [];
 
         if (
@@ -37,7 +36,7 @@ class PostController{
         $count = $postModel->getTotalPosts();
 
         if($count == 0){
-            require_once ROOT."/views/posts/index.php";
+            require_once APP_ROOT."/views/posts/index.php";
             die;
         }
 
@@ -53,11 +52,11 @@ class PostController{
 
         $posts = $postModel->getAll($sort_by, $order, $offset, self::$items_per_page);
 
-        require_once ROOT."/views/posts/index.php";
+        require_once APP_ROOT."/views/posts/index.php";
     }
 
     public function getOne($id){
-        $postModel = new Post();
+        $postModel = new \TodoList\Models\Post();
 
         $post = $postModel->getOne(intval($id));
 
@@ -69,11 +68,11 @@ class PostController{
 
         $_SESSION['edit_post_id'] = $post['id'];
 
-        require_once ROOT."/views/posts/edit.php";
+        require_once APP_ROOT."/views/posts/edit.php";
     }
 
     public function store(){
-        $postModel = new Post();
+        $postModel = new \TodoList\Models\Post();
 
         $res = false;
 
@@ -103,7 +102,7 @@ class PostController{
             die();
         }
 
-        require_once ROOT."/views/posts/create.php";
+        require_once APP_ROOT."/views/posts/create.php";
     }
 
     public function update(){
@@ -114,7 +113,7 @@ class PostController{
             die();
         }
 
-        $postModel = new Post();
+        $postModel = new \TodoList\Models\Post();
         $res = false;
 
         $text           = $this->sanitizer($_POST['text']);

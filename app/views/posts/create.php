@@ -1,6 +1,6 @@
 <?php
 
-require_once ROOT."/views/header.php";
+require_once APP_ROOT."/views/header.php";
 
 ?>
 
@@ -15,18 +15,23 @@ require_once ROOT."/views/header.php";
         }
         ?>
 
-        <form method="post" action="/login">
+        <form method="post" action="/post/create">
             <div class="form-group">
                 <label for="user_name">User name</label>
                 <input type="text" name="user_name" class="form-control" id="user_name" placeholder="User name">
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" class="form-control" id="password" placeholder="********">
+                <label for="user_email">Email address</label>
+                <input type="text" name="user_email" class="form-control" id="user_email" placeholder="name@example.com">
             </div>
 
-            <button type="submit" class="btn btn-primary">Login</button>
+            <div class="form-group">
+                <label for="text">Text</label>
+                <textarea class="form-control" name="text" id="text" rows="3"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add task</button>
 
         </form>
 
@@ -34,4 +39,4 @@ require_once ROOT."/views/header.php";
 
 <?php
 
-require_once ROOT."/views/footer.php";
+require_once APP_ROOT."/views/footer.php";

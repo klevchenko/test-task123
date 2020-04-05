@@ -1,6 +1,6 @@
 <?php
 
-require_once ROOT."/views/header.php";
+require_once APP_ROOT."/views/header.php";
 
 ?>
 
@@ -45,4 +45,4 @@ require_once ROOT."/views/header.php";
 
 <?php
 
-require_once ROOT."/views/footer.php";
+require_once APP_ROOT."/views/footer.php";
