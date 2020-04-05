@@ -2,19 +2,12 @@
 
 require_once APP_ROOT."/views/header.php";
 
-$PostController = new \TodoList\Controllers\Post();
+$tools = new \TodoList\Controllers\Tools();
 
 ?>
 
     <div class="col-12">
-        <?php
-        if(isset($_SESSION['messages']) and is_array($_SESSION['messages'])){
-            foreach ($_SESSION['messages'] as $message){
-                echo $message;
-            }
-            unset($_SESSION['messages']);
-        }
-        ?>
+        <?php \TodoList\Controllers\Tools::flash_message(); ?>
     </div>
 
     <div class="col">
@@ -22,18 +15,18 @@ $PostController = new \TodoList\Controllers\Post();
 
             <span class="p-2">Sorting: </span>
 
-            <a class="btn btn-link" href="<?php echo $PostController::createPaginateLink($page, 'user_name','ASC') ?>">Username A-Z</a>
-            <a class="btn btn-link" href="<?php echo $PostController::createPaginateLink($page, 'user_name', 'DESC' ) ?>">Username Z-A</a>
+            <a class="btn btn-link" href="<?php echo $tools::createPaginateLink($page, 'user_name','ASC') ?>">Username A-Z</a>
+            <a class="btn btn-link" href="<?php echo $tools::createPaginateLink($page, 'user_name', 'DESC' ) ?>">Username Z-A</a>
 
             <span  class="btn btn-link">|</span>
 
-            <a class="btn btn-link" href="<?php echo $PostController::createPaginateLink($page, 'user_email','ASC') ?>">Email address A-Z</a>
-            <a class="btn btn-link" href="<?php echo $PostController::createPaginateLink($page, 'user_email','DESC' ) ?>">Email address Z-A</a>
+            <a class="btn btn-link" href="<?php echo $tools::createPaginateLink($page, 'user_email','ASC') ?>">Email address A-Z</a>
+            <a class="btn btn-link" href="<?php echo $tools::createPaginateLink($page, 'user_email','DESC' ) ?>">Email address Z-A</a>
 
             <span  class="btn btn-link">|</span>
 
-            <a class="btn btn-link" href="<?php echo $PostController::createPaginateLink($page, 'status','DESC') ?>">Status A-Z</a>
-            <a class="btn btn-link" href="<?php echo $PostController::createPaginateLink($page, 'status','ASC' ) ?>">Status Z-A</a>
+            <a class="btn btn-link" href="<?php echo $tools::createPaginateLink($page, 'status','DESC') ?>">Status A-Z</a>
+            <a class="btn btn-link" href="<?php echo $tools::createPaginateLink($page, 'status','ASC' ) ?>">Status Z-A</a>
 
         </div>
     </div>
@@ -82,7 +75,7 @@ $PostController = new \TodoList\Controllers\Post();
                         foreach (range(1, $total_pages) as $page_num){
                             ?>
                             <li class="page-item <?php echo $page == $page_num ? 'active' : '' ?>">
-                                <a class="page-link" href="<?php echo $PostController::createPaginateLink($page_num) ?>">
+                                <a class="page-link" href="<?php echo $tools::createPaginateLink($page_num) ?>">
                                     <?php echo $page_num ?>
                                 </a>
                             </li>

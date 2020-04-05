@@ -6,14 +6,7 @@ require_once APP_ROOT."/views/header.php";
 
     <div class="col-12">
 
-        <?php
-        if(isset($_SESSION['messages']) and is_array($_SESSION['messages'])){
-            foreach ($_SESSION['messages'] as $message){
-                echo $message;
-            }
-            unset($_SESSION['messages']);
-        }
-        ?>
+        <?php \TodoList\Controllers\Tools::flash_message(); ?>
 
         <form method="post" action="/post/create">
             <div class="form-group">
