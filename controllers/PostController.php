@@ -59,7 +59,13 @@ class PostController{
     public function getOne($id){
         $postModel = new Post();
 
-        $post = $postModel->getOne($id);
+        $post = $postModel->getOne(intval($id));
+
+        if(empty($post['id'])){
+            $_SESSION['messages'][] = $this->newError('Wrong post id');
+            header("Location: /");
+            die();
+        }
 
         $_SESSION['edit_post_id'] = $post['id'];
 

@@ -28,7 +28,10 @@ class Post{
         $db = BD::connect();
         $post = [];
 
-        $stmt = $db->query("SELECT * FROM posts WHERE id = $id");
+        $stmt = $db->prepare("SELECT * FROM posts WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+
         while ($row = $stmt->fetch())
         {
             $post = [
